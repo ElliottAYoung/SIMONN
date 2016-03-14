@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+
+require 'simonn'
+
+if ARGV.empty? || ARGV[0] == "--help" || ARGV[0] == "-h"
+  puts "usage: simonn [--version / -v] [--help / -h] <command> <table> [<args>]"
+  puts ""
+  puts "read from / write to the database"
+  puts "    read\t- return object(s) of the specified table from the database\t- alternate: [get, show]"
+  puts "    create\t- add new object(s) to the specified table from the databse\t- alternate: [new, add]"
+  puts "    update\t- update object(s) on the specified table in the database\t- alternate: [edit, change]"
+  puts "    delete\t- delete object(s) from the specified table from the database\t- alternate: [remove, destroy]"
+  puts ""
+  puts "accessing table information / model names"
+  puts "    tables\t- display all tables in the database"
+elsif ARGV[0] == "--version" || ARGV[0] == "-v"
+  puts "Simonn version: #{Gem.loaded_specs["simonn"].version}"
+elsif ARGV[0] == "read" || ARGV[0] == "get" || ARGV[0] == "show"
+  if ARGV[1].nil?
+    puts "#{ARGV[0]}: missing required argument <table>"
+  else
+    Simonn.get_read_args(ARGV[1])
+  end
+elsif ARGV[0] == "create" || ARGV[0] == "new" || ARGV[0] == "add"
+  if ARGV[1].nil?
+    puts "#{ARGV[0]}: missing required argument <table>"
+  else
+    Simonn.get_create_args(ARGV[1])
+  end
+elsif ARGV[0] == "update" || ARGV[0] == "edit" || ARGV[0] == "change"
+  if ARGV[1].nil?
+    puts "#{ARGV[0]}: missing required argument <table>"
+  else
+    Simonn.get_update_args(ARGV[1])
+  end
+elsif ARGV[0] == "destroy" || ARGV[0] == "delete" || ARGV[0] == "remove"
+  if ARGV[1].nil?
+    puts "#{ARGV[0]}: missing required argument <table>"
+  else
+    Simonn.get_destroy_args(ARGV[1])
+  end
+else
+  puts "Unknown option: #{ARGV[0]}"
+  puts ""
+  puts "usage: simonn [--version / -v] [--help / -h] <command> <table> [<args>]"
+  puts ""
+  puts "read from / write to the database"
+  puts "    read\t- return object(s) of the specified table from the database\t- alternate: [get, show]"
+  puts "    create\t- add new object(s) to the specified table from the databse\t- alternate: [new, add]"
+  puts "    update\t- update object(s) on the specified table in the database\t- alternate: [edit, change]"
+  puts "    delete\t- destroy object(s) from the specified table from the database\t- alternate: [remove, destroy]"
+  puts ""
+  puts "accessing table information / model names"
+  puts "    tables\t- display all tables in the database"
+end
+
+
+# read
+# check for table
+# prompt - All, Single, By Query
